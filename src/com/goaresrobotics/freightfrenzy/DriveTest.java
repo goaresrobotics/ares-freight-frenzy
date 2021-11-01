@@ -1,4 +1,4 @@
-package com.aresrobotics.freightfrenzy;
+package com.goaresrobotics.freightfrenzy;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
