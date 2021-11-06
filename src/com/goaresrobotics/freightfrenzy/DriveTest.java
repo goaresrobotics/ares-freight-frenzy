@@ -24,9 +24,9 @@ public class DriveTest extends OpMode {
              */
 
             leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFrontMotor");
-            leftFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+            leftFrontMotor.setDirection(DcMotorSimple.Direction.FORWARD);
             rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
-            rightFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+            rightFrontMotor.setDirection(DcMotorSimple.Direction.FORWARD);
             leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
             leftBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
             rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
