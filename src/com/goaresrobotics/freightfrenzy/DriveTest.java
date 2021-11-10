@@ -24,13 +24,13 @@ public class DriveTest extends OpMode {
              */
 
             leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFrontMotor");
-            leftFrontMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+            leftFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
             rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
-            rightFrontMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+            rightFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
             leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
-            leftBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+            leftBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
             rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
-            rightBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+            rightBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
             // Send telemetry message to signify robot waiting;
             telemetry.addData("Say", "Hello Driver");    //
@@ -52,4 +52,3 @@ public class DriveTest extends OpMode {
             leftBackMotor.setPower(left);
             rightBackMotor.setPower(right);
         }
-    }
