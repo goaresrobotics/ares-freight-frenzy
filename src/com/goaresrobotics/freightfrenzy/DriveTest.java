@@ -26,11 +26,11 @@ public class DriveTest extends OpMode {
             leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFrontMotor");
             leftFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
             rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
-            rightFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+            rightFrontMotor.setDirection(DcMotorSimple.Direction.FORWARD);
             leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
             leftBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
             rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
-            rightBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+            rightBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
             // Send telemetry message to signify robot waiting;
             telemetry.addData("Say", "Hello Driver");    //
@@ -44,7 +44,7 @@ public class DriveTest extends OpMode {
             double right;
 
             // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
-            left = -gamepad1.left_stick_y;
+            left = gamepad1.left_stick_y;
             right = gamepad1.right_stick_y;
 
             leftFrontMotor.setPower(left);

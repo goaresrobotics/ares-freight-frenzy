@@ -28,11 +28,11 @@ public class AutonomousTest extends OpMode {
             leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFrontMotor");
             leftFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
             rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
-            rightFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+            rightFrontMotor.setDirection(DcMotorSimple.Direction.FORWARD);
             leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
             leftBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
             rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
-            rightBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+            rightBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
             // Send telemetry message to signify robot waiting;
             telemetry.addData("Say", "Hello Driver");
@@ -42,22 +42,23 @@ public class AutonomousTest extends OpMode {
     public void start(){
             DriveForward(1);
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        TurnRight(1);
+            TurnLeft(1);
         try {
-            Thread.sleep(200);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        DriveForward(1);
+            DriveForward(1);
         try {
-            Thread.sleep(8000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        stop();
 
     }
 
@@ -71,12 +72,14 @@ public class AutonomousTest extends OpMode {
             leftBackMotor.setPower(power);
             rightBackMotor.setPower(power);
             rightFrontMotor.setPower(power);
+        telemetry.addData("Say", "Driving Forward");
         }
-    public void TurnRight(double power){
-            leftFrontMotor.setPower(power);
-            leftBackMotor.setPower(power);
-            rightFrontMotor.setPower(-power);
-            rightBackMotor.setPower(-power);
+    public void TurnLeft(double power){
+            leftFrontMotor.setPower(-power);
+            leftBackMotor.setPower(-power);
+            rightFrontMotor.setPower(power);
+            rightBackMotor.setPower(power);
+        telemetry.addData("Say", "Turning Left");
     }
 
 
