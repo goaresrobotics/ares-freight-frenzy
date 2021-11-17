@@ -30,9 +30,9 @@ public class AutonomousTest extends OpMode {
             rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
             rightFrontMotor.setDirection(DcMotorSimple.Direction.FORWARD);
             leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
-            leftBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+            leftBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
             rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
-            rightBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+            rightBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
             // Send telemetry message to signify robot waiting;
             telemetry.addData("Say", "Hello Driver");
@@ -45,6 +45,7 @@ public class AutonomousTest extends OpMode {
             Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
+
         }
             TurnLeft(1);
         try {

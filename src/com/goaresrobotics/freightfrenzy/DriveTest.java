@@ -14,42 +14,43 @@ public class DriveTest extends OpMode {
     DcMotor leftBackMotor;
     DcMotor rightBackMotor;
 
-        /*
-         * Code to run ONCE when the driver hits INIT
+    /*
+     * Code to run ONCE when the driver hits INIT
+     */
+    @Override
+    public void init() {
+        /* Initialize the hardware variables.
+         * The init() method of the hardware class does all the work here
          */
-        @Override
-        public void init() {
-            /* Initialize the hardware variables.
-             * The init() method of the hardware class does all the work here
-             */
 
-            leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFrontMotor");
-            leftFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-            rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
-            rightFrontMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-            leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
-            leftBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-            rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
-            rightBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFrontMotor");
+        leftFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
+        rightFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
+        leftBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
+        rightBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
-            // Send telemetry message to signify robot waiting;
-            telemetry.addData("Say", "Hello Driver");    //
-        }
-        /*
-         * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
-         */
-        @Override
-        public void loop() {
-            double left;
-            double right;
+        // Send telemetry message to signify robot waiting;
+        telemetry.addData("Say", "Hello Driver");    //
+    }
 
-            // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
-            left = gamepad1.left_stick_y;
-            right = gamepad1.right_stick_y;
+    /*
+     * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
+     */
+    @Override
+    public void loop() {
+        double left;
+        double right;
 
-            leftFrontMotor.setPower(left);
-            rightFrontMotor.setPower(right);
-            leftBackMotor.setPower(left);
-            rightBackMotor.setPower(right);
-        }
+        // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
+        left = -gamepad1.left_stick_y;
+        right = gamepad1.right_stick_y;
+
+        leftFrontMotor.setPower(left);
+        rightFrontMotor.setPower(right);
+        leftBackMotor.setPower(left);
+        rightBackMotor.setPower(right);
+    }
 }
