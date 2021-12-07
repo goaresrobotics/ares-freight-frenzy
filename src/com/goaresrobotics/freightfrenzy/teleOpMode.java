@@ -42,14 +42,16 @@ public class DriveTest extends OpMode {
         public void loop() {
             double left;
             double right;
+            double modifier;
 
             // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
             left = gamepad1.left_stick_y;
             right = gamepad1.right_stick_y;
+            modifier = -0.5;
 
-            leftFrontMotor.setPower(left);
-            rightFrontMotor.setPower(right);
-            leftBackMotor.setPower(left);
-            rightBackMotor.setPower(right);
+            leftFrontMotor.setPower(left + modifier);
+            rightFrontMotor.setPower(right + modifier);
+            leftBackMotor.setPower(left + modifier);
+            rightBackMotor.setPower(right + modifier);
         }
 }
