@@ -28,6 +28,7 @@ public class StateMachineExample extends OpMode {
     static final int TURN_LEFT = 4;
     static final int DONE = 5;
     static final int DRIVING_FORWARD_2 = 6;
+    static final int TURN_RIGHT = 7;
 
     // encoder details
     static final double COUNTS_PER_MOTOR_REV = 10;
