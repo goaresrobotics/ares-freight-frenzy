@@ -27,12 +27,16 @@ public class AutonomousTest extends OpMode {
 
             leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFrontMotor");
             leftFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+            leftFrontMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
             rightFrontMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+            rightFrontMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
             leftBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+            leftBackMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
             rightBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+            rightBackMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
             // Send telemetry message to signify robot waiting;
             telemetry.addData("Say", "Hello Driver");
