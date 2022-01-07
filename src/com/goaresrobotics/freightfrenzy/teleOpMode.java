@@ -28,7 +28,7 @@ public class teleOpMode extends OpMode {
             rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
             rightFrontMotor.setDirection(DcMotorSimple.Direction.FORWARD);
             leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
-            leftBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+            leftBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
             rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
             rightBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
