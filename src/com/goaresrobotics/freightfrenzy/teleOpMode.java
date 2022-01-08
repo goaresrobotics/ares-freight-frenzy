@@ -13,6 +13,7 @@ public class teleOpMode extends OpMode {
     DcMotor rightFrontMotor;
     DcMotor leftBackMotor;
     DcMotor rightBackMotor;
+    DcMotor duckTurnMotor;
 
         /*
          * Code to run ONCE when the driver hits INIT
@@ -24,13 +25,15 @@ public class teleOpMode extends OpMode {
              */
 
             leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFrontMotor");
-            leftFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+            leftFrontMotor.setDirection(DcMotorSimple.Direction.FORWARD);
             rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
-            rightFrontMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+            rightFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
             leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
             leftBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
             rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
-            rightBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+            rightBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+            duckTurnMotor = hardwareMap.get(DcMotor.class, "duckTurnMotor");
+            duckTurnMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
             // Send telemetry message to signify robot waiting;
             telemetry.addData("Say", "Hello Driver");    //
@@ -42,14 +45,19 @@ public class teleOpMode extends OpMode {
         public void loop() {
             double left;
             double right;
+            float rTrigger;
+            double modifier;
 
             // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
-            left = -gamepad1.left_stick_y;
-            right = -gamepad1.right_stick_y;
+            left = gamepad1.left_stick_y;
+            right = gamepad1.right_stick_y;
+            rTrigger = gamepad1.right_trigger;
+            modifier = 0.6;
 
-            leftFrontMotor.setPower(left);
-            rightFrontMotor.setPower(right);
-            leftBackMotor.setPower(left);
-            rightBackMotor.setPower(right);
+            leftFrontMotor.setPower(left * modifier);
+            rightFrontMotor.setPower(right * modifier);
+            leftBackMotor.setPower(left * modifier);
+            rightBackMotor.setPower(right * modifier);
+            duckTurnMotor.setPower(rTrigger);
         }
 }
