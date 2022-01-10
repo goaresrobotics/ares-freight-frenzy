@@ -46,18 +46,27 @@ public class teleOpMode extends OpMode {
             double left;
             double right;
             float rTrigger;
+            float lTrigger;
             double modifier;
 
             // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
             left = gamepad1.left_stick_y;
             right = gamepad1.right_stick_y;
             rTrigger = gamepad1.right_trigger;
+            lTrigger = gamepad1.left_trigger;
             modifier = 0.6;
 
             leftFrontMotor.setPower(left * modifier);
             rightFrontMotor.setPower(right * modifier);
             leftBackMotor.setPower(left * modifier);
             rightBackMotor.setPower(right * modifier);
-            duckTurnMotor.setPower(rTrigger);
+            if (lTrigger > 0) {
+                duckTurnMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+                duckTurnMotor.setPower(lTrigger);
+            }
+            if (rTrigger > 0) {
+                duckTurnMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+                duckTurnMotor.setPower(rTrigger);
+            }
         }
 }
