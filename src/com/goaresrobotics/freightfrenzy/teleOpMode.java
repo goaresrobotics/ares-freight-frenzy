@@ -14,7 +14,8 @@ public class teleOpMode extends OpMode {
     DcMotor leftBackMotor;
     DcMotor rightBackMotor;
     DcMotor duckTurnMotor;
-    int loopCount = 0;
+    DcMotor intakeMotor;
+
 
         /*
          * Code to run ONCE when the driver hits INIT
@@ -32,9 +33,11 @@ public class teleOpMode extends OpMode {
             leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
             leftBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
             rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
-            rightBackMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+            rightBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
             duckTurnMotor = hardwareMap.get(DcMotor.class, "duckTurnMotor");
             duckTurnMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+            intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
+
 
             // Send telemetry message to signify robot waiting;
             telemetry.addData("Say", "Hello Driver");    //
@@ -49,36 +52,33 @@ public class teleOpMode extends OpMode {
             float rTrigger;
             float lTrigger;
             double modifier;
+            double intake;
 
             // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
             left = gamepad1.left_stick_y;
             right = gamepad1.right_stick_y;
             rTrigger = gamepad1.right_trigger;
             lTrigger = gamepad1.left_trigger;
+            intake = gamepad2.left_stick_y;
             modifier = 0.6;
 
             leftFrontMotor.setPower(left * modifier);
             rightFrontMotor.setPower(right * modifier);
             leftBackMotor.setPower(left * modifier);
             rightBackMotor.setPower(right * modifier);
+            intakeMotor.setPower(intake);
+
             if (lTrigger > 0) {
                 duckTurnMotor.setDirection(DcMotorSimple.Direction.REVERSE);
                 duckTurnMotor.setPower(lTrigger);
-            }
-            else {
+            } else {
                 duckTurnMotor.setPower(0);
             }
             if (rTrigger > 0) {
                 duckTurnMotor.setDirection(DcMotorSimple.Direction.FORWARD);
                 duckTurnMotor.setPower(rTrigger);
-            }
-            else {
+            } else {
                 duckTurnMotor.setPower(0);
             }
-            if (loopCount % 1000==0) {
-                telemetry.addData("Trigger Value", rTrigger);
-                loopCount = 0;
-            }
-            loopCount ++;
         }
 }

@@ -15,6 +15,7 @@ public class StateMachineExample extends OpMode {
     private DcMotor rightFrontMotor;
     private DcMotor leftBackMotor;
     private DcMotor rightBackMotor;
+    private DcMotor duckTurnMotor;
 
     private boolean opModeStopped = false;
 
