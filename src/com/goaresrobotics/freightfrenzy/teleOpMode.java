@@ -14,6 +14,7 @@ public class teleOpMode extends OpMode {
     DcMotor leftBackMotor;
     DcMotor rightBackMotor;
     DcMotor duckTurnMotor;
+    int loopCount = 0;
 
         /*
          * Code to run ONCE when the driver hits INIT
@@ -64,9 +65,20 @@ public class teleOpMode extends OpMode {
                 duckTurnMotor.setDirection(DcMotorSimple.Direction.REVERSE);
                 duckTurnMotor.setPower(lTrigger);
             }
+            else {
+                duckTurnMotor.setPower(0);
+            }
             if (rTrigger > 0) {
                 duckTurnMotor.setDirection(DcMotorSimple.Direction.FORWARD);
                 duckTurnMotor.setPower(rTrigger);
             }
+            else {
+                duckTurnMotor.setPower(0);
+            }
+            if (loopCount % 1000==0) {
+                telemetry.addData("Trigger Value", rTrigger);
+                loopCount = 0;
+            }
+            loopCount ++;
         }
 }
