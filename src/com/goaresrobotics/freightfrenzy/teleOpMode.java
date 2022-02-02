@@ -37,7 +37,7 @@ public class teleOpMode extends OpMode {
             duckTurnMotor = hardwareMap.get(DcMotor.class, "duckTurnMotor");
             duckTurnMotor.setDirection(DcMotorSimple.Direction.FORWARD);
             intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
-
+            intakeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             // Send telemetry message to signify robot waiting;
             telemetry.addData("Say", "Hello Driver");    //
@@ -53,6 +53,7 @@ public class teleOpMode extends OpMode {
             float lTrigger;
             double modifier;
             double intake;
+            double intakeEncoder;
 
             // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
             left = gamepad1.left_stick_y;
@@ -61,6 +62,7 @@ public class teleOpMode extends OpMode {
             lTrigger = gamepad1.left_trigger;
             intake = gamepad2.left_stick_y;
             modifier = 0.6;
+            intakeEncoder = intakeMotor.getCurrentPosition();
 
             leftFrontMotor.setPower(left * modifier);
             rightFrontMotor.setPower(right * modifier);
@@ -80,5 +82,21 @@ public class teleOpMode extends OpMode {
             } else {
                 duckTurnMotor.setPower(0);
             }
+            if (intakeEncoder == 12) {
+                intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            }
+            else if (intakeEncoder == -53) {
+                intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            }
+            else {
+                intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            }
+            if (left > 0) {
+                intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            }
+            else if (right > 0) {
+                intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            }
+            telemetry.addData("Encoder Value", intakeMotor.getCurrentPosition());
         }
 }
