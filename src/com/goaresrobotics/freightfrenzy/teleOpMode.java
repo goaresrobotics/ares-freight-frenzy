@@ -40,7 +40,7 @@ public class teleOpMode extends OpMode {
             intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
             // Send telemetry message to signify robot waiting;
-            telemetry.addData("Say", "Hello Driver");    //
+            telemetry.addData("Say", "Hello Driver");
         }
         /*
          * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
@@ -68,7 +68,7 @@ public class teleOpMode extends OpMode {
             rightFrontMotor.setPower(right * modifier);
             leftBackMotor.setPower(left * modifier);
             rightBackMotor.setPower(right * modifier);
-            intakeMotor.setPower(intake);
+            intakeMotor.setPower(intake * modifier);
 
             if (lTrigger > 0) {
                 duckTurnMotor.setDirection(DcMotorSimple.Direction.REVERSE);

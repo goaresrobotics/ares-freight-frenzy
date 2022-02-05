@@ -16,6 +16,7 @@ public class StateMachineExample extends OpMode {
     private DcMotor leftBackMotor;
     private DcMotor rightBackMotor;
     private DcMotor duckTurnMotor;
+    private DcMotor intakeMotor;
 
     private boolean opModeStopped = false;
 
@@ -68,6 +69,8 @@ public class StateMachineExample extends OpMode {
         opModeStopped = false;
         leftFrontMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightFrontMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftBackMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        rightBackMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     @Override
