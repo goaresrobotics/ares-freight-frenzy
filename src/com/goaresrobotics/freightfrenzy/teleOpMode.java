@@ -37,7 +37,7 @@ public class teleOpMode extends OpMode {
             duckTurnMotor = hardwareMap.get(DcMotor.class, "duckTurnMotor");
             duckTurnMotor.setDirection(DcMotorSimple.Direction.FORWARD);
             intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
-            intakeMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
             // Send telemetry message to signify robot waiting;
             telemetry.addData("Say", "Hello Driver");    //
@@ -82,20 +82,15 @@ public class teleOpMode extends OpMode {
             } else {
                 duckTurnMotor.setPower(0);
             }
-            if (intakeEncoder == 12) {
-                intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            
+            if (intakeEncoder >= 12) {
+                intakeMotor.setPower(-1);
             }
-            else if (intakeEncoder == -53) {
-                intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            else if (intakeEncoder <= -53) {
+                intakeMotor.setPower(1);
             }
             else {
-                intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-            }
-            if (left > 0) {
-                intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-            }
-            else if (right > 0) {
-                intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                intakeMotor.setPower(intake);
             }
             telemetry.addData("Encoder Value", intakeMotor.getCurrentPosition());
         }
