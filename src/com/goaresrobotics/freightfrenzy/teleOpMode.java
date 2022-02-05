@@ -82,16 +82,5 @@ public class teleOpMode extends OpMode {
             } else {
                 duckTurnMotor.setPower(0);
             }
-            
-            if (intakeEncoder >= 12) {
-                intakeMotor.setPower(-1);
-            }
-            else if (intakeEncoder <= -53) {
-                intakeMotor.setPower(1);
-            }
-            else {
-                intakeMotor.setPower(intake);
-            }
-            telemetry.addData("Encoder Value", intakeMotor.getCurrentPosition());
         }
 }
