@@ -7,34 +7,15 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import java.sql.Time;
 
-@Autonomous(name="autonomousTest")
+@Autonomous(name="autonomousBlue")
 
-public class AutonomousTest extends OpMode {
+public class autonomousBlue extends OpMode {
 
     // Motor definitions
     private DcMotor leftFrontMotor;
     private DcMotor rightFrontMotor;
     private DcMotor leftBackMotor;
     private DcMotor rightBackMotor;
-
-    private boolean opModeStopped = false;
-
-    private int state = 0;
-    private int next_state;
-    // States
-    static final int INIT = 0;
-    static final int START = 1;
-    static final int DRIVING_FORWARD = 2;
-    static final int STOP = 3;
-    static final int TURN_LEFT = 4;
-    static final int DONE = 5;
-
-    // encoder details
-    static final double COUNTS_PER_MOTOR_REV = 10;
-    static final double GEARBOX_RATIO = 20;
-    static final double WHEEL_DIAMETER_INCHES = 12.56;
-    static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * GEARBOX_RATIO) /
-            (WHEEL_DIAMETER_INCHES * 3.1459);
 
         @Override
         public void init() {
@@ -67,54 +48,30 @@ public class AutonomousTest extends OpMode {
     @Override
     public void loop()
     {
-        switch(state)
-        {
-            case INIT:
-                // code to run when state == 0
-                // ERROR condition
-                break;
 
-            case START:
-                DriveForward(0.6);
-                try {
-                    Thread.sleep(400);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                state = TURN_LEFT;
-                break;
-
-            case TURN_LEFT:
-                TurnLeft(0.6);
-                try {
-                    Thread.sleep(400);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                state = DRIVING_FORWARD;
-                break;
-
-            case DRIVING_FORWARD:
                 DriveForward(0.6);
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                state = STOP;
-                // wait to until we get to position
-                // when get to position state = next_state
-                break;
-            case STOP:
 
-                default:
-                break;
-        } // end switch
-        try {
-            Thread.sleep(250);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+                TurnLeft(0.6);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
+                DriveForward(0.6);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Stop();
     }
 
     @Override
@@ -124,7 +81,7 @@ public class AutonomousTest extends OpMode {
          Called when the driver presses STOP
          Set a flag here so we know when we are stopped and don't accidentally run EncoderDrive
          */
-        opModeStopped = true;
+        telemetry.addData("Say", "Done!");
     }
 
     public void DriveForward(double power)
