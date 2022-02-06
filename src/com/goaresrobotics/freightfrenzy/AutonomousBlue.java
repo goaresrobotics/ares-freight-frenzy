@@ -5,11 +5,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import java.sql.Time;
+@Autonomous(name="autonomousBlue")
 
-@Autonomous(name="autonomousTest")
-
-public class AutonomousTest extends OpMode {
+public class AutonomousBlue extends OpMode {
 
     DcMotor leftFrontMotor;
     DcMotor rightFrontMotor;
@@ -44,19 +42,19 @@ public class AutonomousTest extends OpMode {
 
     @Override
     public void start(){
-            DriveForward(1);
+            DriveForward(0.5);
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-            TurnLeft(1);
+            TurnLeft(0.5);
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-            DriveForward(1);
+            DriveForward(0.5);
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
