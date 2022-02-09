@@ -5,42 +5,29 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@TeleOp(name="telelOpMode")
+@TeleOp(name="teleOpMode")
 
 public class teleOpMode extends OpMode {
 
-    DcMotor leftFrontMotor;
-    DcMotor rightFrontMotor;
-    DcMotor leftBackMotor;
-    DcMotor rightBackMotor;
-    DcMotor duckTurnMotor;
-    DcMotor intakeMotor;
+    DcMotor  leftFront;
+    DcMotor  rightFront;
+    DcMotor  leftBack;
+    DcMotor  rightBack;
+    DcMotor  duckTurn;
+    DcMotor  intakeMotor;
 
+    AresRobotHardware robot   = new AresRobotHardware();
 
         /*
          * Code to run ONCE when the driver hits INIT
          */
         @Override
         public void init() {
-            /* Initialize the hardware variables.
-             * The init() method of the hardware class does all the work here
-             */
 
-            leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFrontMotor");
-            leftFrontMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-            rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
-            rightFrontMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-            leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
-            leftBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-            rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
-            rightBackMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-            duckTurnMotor = hardwareMap.get(DcMotor.class, "duckTurnMotor");
-            duckTurnMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-            intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
-            intakeMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.init(hardwareMap);
 
             // Send telemetry message to signify robot waiting;
-            telemetry.addData("Say", "Hello Driver");    //
+            telemetry.addData("Say", "Hello Driver");
         }
         /*
          * Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP
@@ -51,9 +38,9 @@ public class teleOpMode extends OpMode {
             double right;
             float rTrigger;
             float lTrigger;
-            double modifier;
             double intake;
-            double intakeEncoder;
+            double modifier;
+            double intakeModifier;
 
             // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
             left = gamepad1.left_stick_y;
@@ -62,36 +49,25 @@ public class teleOpMode extends OpMode {
             lTrigger = gamepad1.left_trigger;
             intake = gamepad2.left_stick_y;
             modifier = 0.6;
-            intakeEncoder = intakeMotor.getCurrentPosition();
+            intakeModifier = 0.7;
 
-            leftFrontMotor.setPower(left * modifier);
-            rightFrontMotor.setPower(right * modifier);
-            leftBackMotor.setPower(left * modifier);
-            rightBackMotor.setPower(right * modifier);
-            intakeMotor.setPower(intake);
+            leftFront.setPower(left * modifier);
+            rightFront.setPower(right * modifier);
+            leftBack.setPower(left * modifier);
+            rightBack.setPower(right * modifier);
+            intakeMotor.setPower(intake * intakeModifier);
 
             if (lTrigger > 0) {
-                duckTurnMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-                duckTurnMotor.setPower(lTrigger);
+                duckTurn.setDirection(DcMotorSimple.Direction.REVERSE);
+                duckTurn.setPower(lTrigger);
             } else {
-                duckTurnMotor.setPower(0);
+                duckTurn.setPower(0);
             }
             if (rTrigger > 0) {
-                duckTurnMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-                duckTurnMotor.setPower(rTrigger);
+                duckTurn.setDirection(DcMotorSimple.Direction.FORWARD);
+                duckTurn.setPower(rTrigger);
             } else {
-                duckTurnMotor.setPower(0);
+                duckTurn.setPower(0);
             }
-            
-            if (intakeEncoder >= 12) {
-                intakeMotor.setPower(-1);
-            }
-            else if (intakeEncoder <= -53) {
-                intakeMotor.setPower(1);
-            }
-            else {
-                intakeMotor.setPower(intake);
-            }
-            telemetry.addData("Encoder Value", intakeMotor.getCurrentPosition());
         }
 }
