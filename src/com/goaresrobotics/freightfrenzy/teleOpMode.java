@@ -41,8 +41,7 @@ public class teleOpMode extends OpMode {
             double intake;
             double modifier;
             double intakeModifier;
-
-            // Run wheels in tank mode (note: The joystick goes negative when pushed forwards, so negate it)
+            
             left = gamepad1.left_stick_y;
             right = gamepad1.right_stick_y;
             rTrigger = gamepad1.right_trigger;
