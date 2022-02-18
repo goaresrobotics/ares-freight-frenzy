@@ -9,14 +9,14 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 public class teleOpMode extends OpMode {
 
-    DcMotor  leftFront;
-    DcMotor  rightFront;
-    DcMotor  leftBack;
-    DcMotor  rightBack;
-    DcMotor  duckTurn;
-    DcMotor  intakeMotor;
+    public DcMotor  leftFront   = null;
+    public DcMotor  rightFront  = null;
+    public DcMotor  leftBack = null;
+    public DcMotor  rightBack = null;
+    public DcMotor  duckTurn = null;
+    public DcMotor  intakeMotor = null;
 
-    AresRobotHardware robot   = new AresRobotHardware();
+
 
         /*
          * Code to run ONCE when the driver hits INIT
@@ -24,7 +24,19 @@ public class teleOpMode extends OpMode {
         @Override
         public void init() {
 
-            robot.init(hardwareMap);
+            leftFront = hardwareMap.get(DcMotor.class, "leftFrontMotor");
+            leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
+            rightFront = hardwareMap.get(DcMotor.class, "rightFrontMotor");
+            rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+            leftBack = hardwareMap.get(DcMotor.class, "leftBackMotor");
+            leftBack.setDirection(DcMotorSimple.Direction.FORWARD);
+            rightBack = hardwareMap.get(DcMotor.class, "rightBackMotor");
+            rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+            duckTurn = hardwareMap.get(DcMotor.class, "duckTurnMotor");
+            duckTurn.setDirection(DcMotorSimple.Direction.FORWARD);
+            intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
+            intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+
 
             // Send telemetry message to signify robot waiting;
             telemetry.addData("Say", "Hello Driver");
