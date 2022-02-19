@@ -55,9 +55,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="AutoTime", group="Pushbot")
+@Autonomous(name="AutoTimeS", group="Pushbot")
 @Config
-public class AutoTime extends LinearOpMode {
+public class AutoTimeS extends LinearOpMode {
 
     /* Declare OpMode members. */
     RobotHardware robot   = new RobotHardware();   // Use a Pushbot's hardware
@@ -71,7 +71,8 @@ public class AutoTime extends LinearOpMode {
     public static double turnright = 1.06;
     public static double backward = 0.92;
     public static double duckspin = 2;
-    public static double forward2 = 3.7;
+    public static double turn2 = 1.4;
+    public static double forward2 = 0.7;
 
 
     @Override
@@ -130,13 +131,22 @@ public class AutoTime extends LinearOpMode {
             telemetry.update();
         }
 
-        //Step 5:  Drive and Park in Warehouse
-        robot.leftBack.setPower(FORWARD_SPEED);
+        //Step 5:  Turn to Face Storage unit
+        robot.leftBack.setPower(-FORWARD_SPEED);
         robot.rightBack.setPower(FORWARD_SPEED);
         robot.duckTurn.setPower(0);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < forward2)) {
+        while (opModeIsActive() && (runtime.seconds() < turn2)) {
             telemetry.addData("Path", "Leg 5: %2.5f S Elapsed", runtime.seconds());
+            telemetry.update();
+        }
+
+        //Step 6:  Drive and Park in Storage Unit
+        robot.leftBack.setPower(FORWARD_SPEED);
+        robot.rightBack.setPower(FORWARD_SPEED);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < forward2)) {
+            telemetry.addData("Path", "Leg 6: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
 
