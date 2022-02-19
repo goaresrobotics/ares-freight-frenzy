@@ -34,7 +34,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public class AresRobotHardware
+public class RobotHardware
 {
     /* Public OpMode members. */
     public DcMotor  leftFront   = null;
@@ -49,7 +49,7 @@ public class AresRobotHardware
     private ElapsedTime period  = new ElapsedTime();
 
     /* Constructor */
-    public AresRobotHardware(){
+    public RobotHardware(){
 
     }
 
@@ -64,11 +64,11 @@ public class AresRobotHardware
         rightFront = hwMap.get(DcMotor.class, "rightFrontMotor");
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftBack = hwMap.get(DcMotor.class, "leftBackMotor");
-        leftBack.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
         rightBack = hwMap.get(DcMotor.class, "rightBackMotor");
-        rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightBack.setDirection(DcMotorSimple.Direction.FORWARD);
         duckTurn = hwMap.get(DcMotor.class, "duckTurnMotor");
-        duckTurn.setDirection(DcMotorSimple.Direction.FORWARD);
+        duckTurn.setDirection(DcMotorSimple.Direction.REVERSE);
         intakeMotor = hwMap.get(DcMotor.class, "duckTurnMotor");
         intakeMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 

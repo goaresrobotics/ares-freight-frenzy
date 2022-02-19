@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp(name="teleOpMode")
 
-public class teleOpMode extends OpMode {
+public class teleOp extends OpMode {
 
     public DcMotor  leftFront   = null;
     public DcMotor  rightFront  = null;

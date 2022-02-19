@@ -29,12 +29,10 @@
 
 package com.goaresrobotics.freightfrenzy;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-import com.goaresrobotics.freightfrenzy.AresRobotHardware;
 
 /**
  * This file illustrates the concept of driving a path based on time.
@@ -57,17 +55,24 @@ import com.goaresrobotics.freightfrenzy.AresRobotHardware;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Pushbot: Auto Drive By Time", group="Pushbot")
-//@Disabled
-public class AutoDriveByTime extends LinearOpMode {
+@Autonomous(name="AutoTime", group="Pushbot")
+@Config
+public class AutoTime extends LinearOpMode {
 
     /* Declare OpMode members. */
-    AresRobotHardware robot   = new AresRobotHardware();   // Use a Pushbot's hardware
+    RobotHardware robot   = new RobotHardware();   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
 
 
-    static final double     FORWARD_SPEED = 0.6;
-    static final double     TURN_SPEED    = 0.5;
+    static final double     FORWARD_SPEED = 0.5;
+    static final double     TURN_SPEED    = 0.4;
+
+    public static double foward = 0.26;
+    public static double turnright = 1.06;
+    public static double backward = 0.92;
+    public static double duckspin = 2;
+    public static double forward2 = 3.7;
+
 
     @Override
     public void runOpMode() {
@@ -87,40 +92,54 @@ public class AutoDriveByTime extends LinearOpMode {
 
         // Step through each leg of the path, ensuring that the Auto mode has not been stopped along the way
 
-        // Step 1:  Drive forward for 3 seconds
+        // Step 1:  Drive forward
         robot.leftBack.setPower(FORWARD_SPEED);
         robot.rightBack.setPower(FORWARD_SPEED);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 3.0)) {
+        while (opModeIsActive() && (runtime.seconds() < foward)) {
             telemetry.addData("Path", "Leg 1: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
 
-        // Step 2:  Spin right for 1.3 seconds
+
+        // Step 2:  Turn right
         robot.leftBack.setPower(TURN_SPEED);
         robot.rightBack.setPower(-TURN_SPEED);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 1.3)) {
+        while (opModeIsActive() && (runtime.seconds() < turnright)) {
             telemetry.addData("Path", "Leg 2: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
 
-        // Step 3:  Drive Backwards for 1 Second
+        // Step 3:  Drive Backwards
         robot.leftBack.setPower(-FORWARD_SPEED);
         robot.rightBack.setPower(-FORWARD_SPEED);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 1.0)) {
+        while (opModeIsActive() && (runtime.seconds() < backward)) {
             telemetry.addData("Path", "Leg 3: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
 
-        // Step 4:  Stop and close the claw.
+        // Step 4:  Stop and turn the duck.
         robot.leftBack.setPower(0);
         robot.rightBack.setPower(0);
-        robot.duckTurn.setPower(1.0);
+        robot.duckTurn.setPower(-0.5);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < duckspin)) {
+            telemetry.addData("Path", "Leg 4: %2.5f S Elapsed", runtime.seconds());
+            telemetry.update();
+        }
 
-        telemetry.addData("Path", "Complete");
-        telemetry.update();
-        sleep(1000);
+        //Step 5:  Drive and Park in Warehouse
+        robot.leftBack.setPower(FORWARD_SPEED);
+        robot.rightBack.setPower(FORWARD_SPEED);
+        robot.duckTurn.setPower(0);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < forward2)) {
+            telemetry.addData("Path", "Leg 5: %2.5f S Elapsed", runtime.seconds());
+            telemetry.update();
+        }
+
+
     }
 }
