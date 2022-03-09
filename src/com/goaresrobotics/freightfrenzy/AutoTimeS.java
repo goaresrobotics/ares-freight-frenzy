@@ -55,12 +55,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="AutoTimeS", group="Pushbot")
+@Autonomous(name="AutoTimeS", group="PushBot")
 @Config
 public class AutoTimeS extends LinearOpMode {
 
     /* Declare OpMode members. */
-    RobotHardware robot   = new RobotHardware();   // Use a Pushbot's hardware
+    RobotHardware robot   = new RobotHardware();   // Use a PushBot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
 
 
@@ -68,9 +68,9 @@ public class AutoTimeS extends LinearOpMode {
     static final double     TURN_SPEED    = 0.4;
 
     public static double foward = 0.26;
-    public static double turnright = 1.06;
+    public static double turnRight = 1.06;
     public static double backward = 0.92;
-    public static double duckspin = 2;
+    public static double duckSpin = 2;
     public static double turn2 = 1.4;
     public static double forward2 = 0.7;
 
@@ -107,7 +107,7 @@ public class AutoTimeS extends LinearOpMode {
         robot.leftBack.setPower(TURN_SPEED);
         robot.rightBack.setPower(-TURN_SPEED);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < turnright)) {
+        while (opModeIsActive() && (runtime.seconds() < turnRight)) {
             telemetry.addData("Path", "Leg 2: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
@@ -126,7 +126,7 @@ public class AutoTimeS extends LinearOpMode {
         robot.rightBack.setPower(0);
         robot.duckTurn.setPower(-0.5);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < duckspin)) {
+        while (opModeIsActive() && (runtime.seconds() < duckSpin)) {
             telemetry.addData("Path", "Leg 4: %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
