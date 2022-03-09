@@ -76,17 +76,20 @@ public class AutoEncoder extends LinearOpMode {
     static final double     WHEEL_DIAMETER_INCHES   = 4 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
                                                       (WHEEL_DIAMETER_INCHES * 3.1415);
-    static final double     DRIVE_SPEED             = 0.6;
-    static final double     TURN_SPEED              = 0.5;
-    static final double     DUCK_SPEED              = 0.3;
+    static final double     DRIVE_SPEED             = 0.3;
+    static final double     TURN_SPEED              = 0.2;
 
     //These values are close but not correct
-    public static double leftinches1 = 1.25;
-    public static double rightinches1 = 1.25;
-    public static double leftinches2 = -3.6;
-    public static double rightinches2 = 3.6;
-    public static double leftinches3 = -6;
-    public static double rightinches3 = -6;
+    public static double leftInches1 = 1;
+    public static double rightInches1 = 1;
+    public static double leftInches2 = -3;
+    public static double rightInches2 = 3;
+    public static double leftInches3 = -6;
+    public static double rightInches3 = -6;
+    public static double leftInches4 = -1;
+    public static double rightInches4 = 1;
+    public static double leftInches5 = 23;
+    public static double rightinches5 = 23;
 
     @Override
     public void runOpMode() {
@@ -118,17 +121,23 @@ public class AutoEncoder extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  leftinches1,  rightinches1, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
-        telemetry.addData("Completed first movement", "True");
-        telemetry.update();
-        encoderDrive(TURN_SPEED,   leftinches2, rightinches2, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
-        telemetry.addData("Started to turn","True");
-        telemetry.update();
-        encoderDrive(DRIVE_SPEED, leftinches3, rightinches3, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
+        encoderDrive(DRIVE_SPEED,  leftInches1,  rightInches1, 5);  // S1: Forward 47 Inches with 5 Sec timeout
 
-        robot.duckTurn.setPower(1);
+        encoderDrive(TURN_SPEED,   leftInches2, rightInches2, 4);  // S2: Turn Right 12 Inches with 4 Sec timeout
 
-        sleep(1000);
+        encoderDrive(DRIVE_SPEED, leftInches3, rightInches3, 4);  // S3: Reverse 24 Inches with 4 Sec timeout
+
+        robot.duckTurn.setPower(0.3);
+        sleep(3000);
+
+        encoderDrive(TURN_SPEED, leftInches4, rightInches4, 4);
+
+        robot.duckTurn.setPower(0);
+
+        encoderDrive(DRIVE_SPEED, leftInches5, rightinches5, 10);
+
+
+
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -192,7 +201,7 @@ public class AutoEncoder extends LinearOpMode {
             robot.leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            //  sleep(250);   // optional pause after each move
+              sleep(1000);   // optional pause after each move
         }
     }
 }
