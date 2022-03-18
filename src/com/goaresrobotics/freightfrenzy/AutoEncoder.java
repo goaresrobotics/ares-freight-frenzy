@@ -71,8 +71,8 @@ public class AutoEncoder extends LinearOpMode {
     RobotHardware robot   = new RobotHardware();   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
 
-    static final double     COUNTS_PER_MOTOR_REV    = 140 ;    // eg: TETRIX Motor Encoder
-    static final double     DRIVE_GEAR_REDUCTION    = 20 ;     // This is < 1.0 if geared UP
+    static final double     COUNTS_PER_MOTOR_REV    = 455 ;    // eg: TETRIX Motor Encoder
+    static final double     DRIVE_GEAR_REDUCTION    = 1 ;     // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 4 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
                                                       (WHEEL_DIAMETER_INCHES * 3.1415);
@@ -80,16 +80,16 @@ public class AutoEncoder extends LinearOpMode {
     static final double     TURN_SPEED              = 0.2;
 
     //These values are close but not correct
-    public static double leftInches1 = 1;
-    public static double rightInches1 = 1;
-    public static double leftInches2 = -3;
-    public static double rightInches2 = 3;
-    public static double leftInches3 = -6;
-    public static double rightInches3 = -6;
-    public static double leftInches4 = -1;
-    public static double rightInches4 = 1;
-    public static double leftInches5 = 23;
-    public static double rightinches5 = 23;
+    public static double leftInches1 = 4;
+    public static double rightInches1 = 4;
+    public static double leftInches2 = -21;
+    public static double rightInches2 = 21;
+    public static double leftInches3 = -40;
+    public static double rightInches3 = -40;
+    public static double leftInches4 = -4;
+    public static double rightInches4 = 4;
+    public static double leftInches5 = 110;
+    public static double rightinches5 = 110;
 
     @Override
     public void runOpMode() {

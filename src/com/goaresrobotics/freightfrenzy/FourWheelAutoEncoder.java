@@ -64,7 +64,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 @Config
 @Autonomous(name="AutoDriveByEncoder", group="Pushbot")
 
-public class FourWheelAutoTest extends LinearOpMode {
+public class FourWheelAutoEncoder extends LinearOpMode {
 
     /* Declare OpMode members. */
     RobotHardware robot   = new RobotHardware();   // Use a Pushbot's hardware
